@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Maxxer | One API key for GPT, Claude, DeepSeek, GLM & Grok</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{--bg:#e9eef2;--surface:#f8fafb;--ink:#17212b;--muted:#566474;--line:#c9d3dc;--accent:#2b50d8;--accent-ink:#fff;--signal:#e59a0b;--code:#17212b;--code-ink:#dfe8f1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--surface:#162130;--ink:#e6edf4;--muted:#93a3b5;--line:#2a3a4d;--accent:#7b9bff;--accent-ink:#0f1720;--signal:#f2b43a;--code:#0a1018;--code-ink:#dfe8f1}}
+:root[data-theme="dark"]{--bg:#0f1720;--surface:#162130;--ink:#e6edf4;--muted:#93a3b5;--line:#2a3a4d;--accent:#7b9bff;--accent-ink:#0f1720;--signal:#f2b43a;--code:#0a1018;--code-ink:#dfe8f1}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header{border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;flex-wrap:wrap}
+.brand{font:700 22px "Bricolage Grotesque",sans-serif;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:26px;height:26px;border-radius:7px;background:var(--accent);position:relative;display:inline-block}
+.brand i::before,.brand i::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:var(--signal);top:10px}
+.brand i::before{left:5px}.brand i::after{right:5px}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{text-decoration:none;color:var(--muted);font-size:15px}
+nav ul a:hover{color:var(--ink)}
+.btn{display:inline-block;padding:12px 20px;border-radius:8px;font-weight:500;text-decoration:none;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;font-size:16px;font-family:inherit}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn:hover{filter:brightness(1.08)}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;padding:72px 0 64px}
+h1{font:700 clamp(38px,6vw,64px)/1.02 "Bricolage Grotesque",sans-serif;letter-spacing:-.02em;margin:0 0 20px}
+.lead{color:var(--muted);max-width:52ch;margin:0 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.note{font-size:14px;color:var(--muted);margin-top:16px}
+.panel{background:var(--code);color:var(--code-ink);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.tabs{display:flex;border-bottom:1px solid #ffffff22}
+.tabs button{flex:1;background:none;border:0;color:#93a3b5;padding:12px;font:500 14px "IBM Plex Mono",monospace;cursor:pointer}
+.tabs button[aria-selected="true"]{color:#fff;box-shadow:inset 0 -2px 0 var(--signal)}
+pre{margin:0;padding:20px;overflow-x:auto;font:400 14px/1.7 "IBM Plex Mono",monospace;min-height:210px}
+.hl{color:var(--signal)}
+section{padding:56px 0;border-top:1px solid var(--line)}
+h2{font:700 clamp(28px,4vw,38px)/1.1 "Bricolage Grotesque",sans-serif;letter-spacing:-.01em;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;font:500 14px "IBM Plex Sans",sans-serif}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:15px}
+th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line)}
+th{font-weight:500;color:var(--muted);font-size:14px}
+tr:last-child td{border-bottom:0}
+td.num{font-family:"IBM Plex Mono",monospace;font-size:14px}.idsub{font:400 13px "IBM Plex Mono",monospace;color:var(--muted)}
+td.num,th.num{text-align:right}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{padding:24px;border-right:1px solid var(--line);counter-increment:s}
+.steps li:last-child{border-right:0}
+.steps li::before{content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--signal);color:#17212b;font-weight:700;margin-bottom:12px}
+.steps h3{margin:0 0 6px;font:700 19px "Bricolage Grotesque",sans-serif}
+.steps p{margin:0;color:var(--muted);font-size:15px}
+.links{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.links a{display:block;padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none}
+.links a:hover{border-color:var(--accent)}
+.links b{display:block;margin-bottom:4px}
+.links span{color:var(--muted);font-size:15px}
+.agents{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.agents a{font:500 14px "IBM Plex Mono",monospace;padding:8px 12px;border:1px solid var(--line);border-radius:8px;text-decoration:none;background:var(--surface)}
+.pay{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.qr{width:168px;height:168px;background:#fff;padding:8px;border-radius:8px}
+.qr svg{width:100%;height:100%;display:block}
+.addr{display:block;font:500 15px/1.5 "IBM Plex Mono",monospace;word-break:break-all;margin:6px 0 16px}
+.paylabel{margin:0;color:var(--muted);font-size:14px}
+.proof{margin-top:24px;padding:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.pickedList{margin:4px 0 16px;font-size:15px}
+.pick{width:20px;height:20px;accent-color:var(--accent)}
+.proof h3{margin:0 0 6px;font:700 20px "Bricolage Grotesque",sans-serif}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
+.fields label{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+.fields input,.fields select{padding:11px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:400 15px "IBM Plex Sans",sans-serif}
+@media (max-width:800px){.pay,.fields{grid-template-columns:1fr}}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+@media (max-width:800px){.hero{grid-template-columns:1fr;padding:44px 0}.steps,.links{grid-template-columns:1fr}.steps li{border-right:0;border-bottom:1px solid var(--line)}.steps li:last-child{border-bottom:0}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav aria-label="Main">
+<a class="brand" href="#top"><i aria-hidden="true"></i>AI Maxxer</a>
+<ul><li><a href="#models">Models</a></li><li><a href="#start">Setup guides</a></li><li><a href="#agents">For agents</a></li><li><a href="#crypto">Pay with crypto</a></li><li><a href="https://t.me/CoachK99">Support</a></li></ul>
+</nav></div></header>
+
+<main id="top">
+<div class="wrap">
+<div class="hero">
+<div>
+<h1>One API key for every model you use.</h1>
+<p class="lead">AI Maxxer is a prepaid, pay-as-you-go gateway for GPT, Claude, DeepSeek, GLM and Grok. Pay as a guest, get your key by email and Telegram, and switch models by changing one line.</p>
+<div class="cta"><a class="btn" href="#crypto">Pay with crypto</a><a class="btn ghost" href="#models">Compare prices</a></div>
+<p class="note">Prepaid credit. No account or subscription. Your key arrives by email and Telegram.</p>
+</div>
+<div class="panel">
+<div class="tabs" role="tablist" aria-label="Code language">
+<button role="tab" aria-selected="true" data-t="py">Python</button>
+<button role="tab" aria-selected="false" data-t="js">Node.js</button>
+<button role="tab" aria-selected="false" data-t="sh">curl</button>
+</div>
+<pre id="code" aria-live="polite"></pre>
+</div>
+</div>
+</div>
+
+<section id="models"><div class="wrap">
+<h2>Compare models and token prices</h2>
+<p class="sub">Exact model IDs, the API each one speaks, and what a million tokens costs. Prices are in US dollars.</p>
+<div class="filters" role="group" aria-label="Filter by provider" id="filters"></div>
+<div class="scroll"><table>
+<thead><tr><th>Buy</th><th>Model</th><th>Provider</th><th>API</th><th class="num">Input / 1M</th><th class="num">Output / 1M</th><th class="num">Cache read / write</th></tr></thead>
+<tbody id="rows"></tbody></table></div>
+<p class="note" id="pickNote">Tick the models you want. They are added to your payment message.</p>
+</div></section>
+
+<section id="start"><div class="wrap">
+<h2>Connect in three steps</h2>
+<p class="sub">Works with anything that lets you set a base URL: your own app, SDKs, or coding tools.</p>
+<ol class="steps">
+<li><h3>Pay as a guest</h3><p>Tick the models you want in the table, then send your payment using the crypto details below.</p></li>
+<li><h3>Send proof with your email</h3><p>Message us your payment proof and the email address for your key on Telegram.</p></li>
+<li><h3>Get your key and connect</h3><p>We send your key by email and Telegram. Point your tool at AI Maxxer, paste it in, and pick a model ID from the table.</p></li>
+</ol>
+<div class="cta" style="margin-top:28px"><a class="btn" href="#crypto">Pay with crypto</a></div>
+</div></section>
+
+<section id="crypto"><div class="wrap">
+<h2>Pay with crypto</h2>
+<p class="sub">Send ETH on the Ethereum network (mainnet) only. Tokens or other networks sent to this address can be lost.</p>
+<div class="pay">
+<div id="qr" class="qr" role="img" aria-label="QR code for the Ethereum payment address"></div>
+<div>
+<p class="paylabel">Ethereum (ETH) address</p>
+<code id="addr" class="addr">0x3a516374a2131aed8750c28535787a3d5fe05c25</code>
+<div class="cta"><button class="btn ghost" id="copy" type="button">Copy address</button></div>
+<p class="note">No account needed. Pay as a guest, then send proof below.</p>
+</div></div>
+
+<div class="proof">
+<h3>Already paid? Send proof</h3>
+<p class="note" style="margin-top:0">Enter the email where you want your key. The button opens Telegram with your details filled in. Your key is sent to your email and to Telegram.</p>
+<div class="fields">
+<label>Your email<input id="em" type="email" autocomplete="email" placeholder="you@example.com"></label>
+<label>Transaction hash<input id="tx" type="text" placeholder="0x..."></label>
+<label>Amount sent (ETH)<input id="amt" type="text" inputmode="decimal" placeholder="0.05"></label>
+<label>Credit to add (USD)<select id="credit"><option value="">Choose amount</option><option>$5</option><option>$10</option><option>$25</option><option>$50</option><option>$100</option><option value="Other (see Telegram)">Other (say how much on Telegram)</option></select></label>
+</div>
+<p class="paylabel">Models you want</p>
+<p id="pickedList" class="pickedList">No models selected yet. Tick them in the <a href="#models">model table</a>.</p>
+<a class="btn" id="proofBtn" href="https://t.me/CoachK99" target="_blank" rel="noopener">Send proof on Telegram</a>
+<p class="note" id="proofMsg" role="status"></p>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<h2>Pricing and setup by provider</h2>
+<p class="sub">Short guides for each model family.</p>
+<div class="links">
+<a href="#"><b>DeepSeek</b><span>Pricing and setup for the DeepSeek models.</span></a>
+<a href="#"><b>GLM</b><span>Pricing and setup for GLM and GLM Flash.</span></a>
+<a href="#"><b>Grok</b><span>Pricing and setup for the Grok models.</span></a>
+</div>
+</div></section>
+
+<section id="agents"><div class="wrap">
+<h2>For AI agents</h2>
+<p class="sub">Agents can read the quickstart and model catalogue to explain compatibility and setup. The human creates the account, pays, and enters their own key locally.</p>
+<div class="agents">
+<a href="#">/llms.txt</a><a href="#">/llms-full.txt</a><a href="#">/models.json</a><a href="#">/openapi.json</a>
+</div>
+</div></section>
+</main>
+
+<footer><div class="wrap">AI Maxxer. Prepaid AI API access. Payment and support on Telegram.</div></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+var snippets={
+py:'<span class="hl">from</span> openai <span class="hl">import</span> OpenAI\n\nclient = OpenAI(\n  base_url=<span class="hl">"https://api.your-domain.com/v1"</span>,\n  api_key=<span class="hl">"YOUR_AI_MAXXER_KEY"</span>,\n)\n\nreply = client.chat.completions.create(\n  model=<span class="hl">"model-id-from-table"</span>,\n  messages=[{"role":"user","content":"Hello"}],\n)',
+js:'<span class="hl">import</span> OpenAI <span class="hl">from</span> "openai";\n\nconst client = new OpenAI({\n  baseURL: <span class="hl">"https://api.your-domain.com/v1"</span>,\n  apiKey: <span class="hl">process.env.AI_MAXXER_KEY</span>,\n});\n\nconst reply = await client.chat.completions.create({\n  model: <span class="hl">"model-id-from-table"</span>,\n  messages: [{ role: "user", content: "Hello" }],\n});',
+sh:'curl <span class="hl">https://api.your-domain.com/v1/chat/completions</span> \\\n  -H "Authorization: Bearer $AI_MAXXER_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d \'{\n    "model": "model-id-from-table",\n    "messages": [{"role":"user","content":"Hello"}]\n  }\''};
+var code=document.getElementById("code");
+function show(k){code.innerHTML=snippets[k];document.querySelectorAll(".tabs button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.t===k)})}
+document.querySelectorAll(".tabs button").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.t)})});
+show("py");
+
+var models=[
+["GPT-6.1 Sol","gpt-6.1-sol","OpenAI","Responses","0.149477","0.747385","0.007474 / 0.186846"],
+["GPT-6 Astra","gpt-6-astra","OpenAI","Responses","0.747385","3.736925","0.074739 / 0.934231"],
+["Claude Fable 5.1","claude-fable-5-1","Anthropic","Messages","3.587444","17.93722","0.089686 / 4.484305"],
+["Codex Auto Review","codex-auto-review","OpenAI","Responses","0.014948","0.089688","0.001495 / 0.018685"],
+["GPT-5.5","gpt-5.5","OpenAI","Responses","0.373693","2.242158","0.037369"],
+["GPT-5.6 Sol","gpt-5.6-sol","OpenAI","Responses","0.373693","2.242158","0.037369 / 0.467116"],
+["GPT-5.6 Terra","gpt-5.6-terra","OpenAI","Responses","0.149477","0.896862","0.014948 / 0.186846"],
+["GPT-6 Sol","gpt-6-sol","OpenAI","Responses","0.149477","0.747385","0.014948 / 0.186846"],
+["Claude Fable 5","claude-fable-5","Anthropic","Messages","3.587444","17.93722","0.358744 / 4.484305"],
+["Claude Haiku 4.5 20251001","claude-haiku-4-5-20251001","Anthropic","Messages","0.358745","1.793725","0.035875 / 0.448431"],
+["Claude Haiku 5.5","claude-haiku-5-5","Anthropic","Messages","0.035875","0.179375","0.003588 / 0.044844"],
+["Claude Opus 4.6","claude-opus-4-6","Anthropic","Messages","1.793722","8.96861","0.179372 / 2.242153"],
+["Claude Opus 4.7","claude-opus-4-7","Anthropic","Messages","1.793722","8.96861","0.179372 / 2.242153"],
+["Claude Opus 4.8","claude-opus-4-8","Anthropic","Messages","1.793722","8.96861","0.179372 / 2.242153"],
+["Claude Opus 5","claude-opus-5","Anthropic","Messages","1.793722","8.96861","0.179372 / 2.242153"],
+["Claude Opus 5.5","claude-opus-5-5","Anthropic","Messages","1.434978","7.17489","0.071749 / 1.793723"],
+["Claude Sonnet 4.6","claude-sonnet-4-6","Anthropic","Messages","1.076234","5.38117","0.107623 / 1.345293"],
+["Claude Sonnet 5","claude-sonnet-5","Anthropic","Messages","0.717489","3.587445","0.071749 / 0.896861"],
+["Claude Sonnet 5.5","claude-sonnet-5-5","Anthropic","Messages","0.717489","3.587445","0.071749 / 0.896861"],
+["DeepSeek V4.1 Flash","deepseek-v4.1-flash","DeepSeek","Chat Completions","0.13453","0.53812","0.002691"],
+["GLM 5.3","glm-5.3","Z.ai","Chat Completions","0.627803","1.973095","0.116592"],
+["GLM 5.3 Flash","glm-5.3-flash","Z.ai","Chat Completions","0.067265","0.224217","0.013453"],
+["Grok 4.5","grok-4.5","xAI","Chat Completions","0.071749","0.215247","0.010762"],
+["Grok 4.6","grok-4.6","xAI","Chat Completions","0.071749","0.215247","0.017937"],
+["Grok 4.7","grok-4.7","xAI","Chat Completions","0.071749","0.215247","0.017937"]];
+var providers=["All"].concat(models.map(function(m){return m[2]}).filter(function(v,i,a){return a.indexOf(v)===i}));
+var picked={},current="All",f=document.getElementById("filters"),rows=document.getElementById("rows");
+function render(){
+f.innerHTML="";providers.forEach(function(p){var b=document.createElement("button");b.className="chip";b.textContent=p;b.setAttribute("aria-pressed",p===current);b.onclick=function(){current=p;render()};f.appendChild(b)});
+rows.innerHTML=models.filter(function(m){return current==="All"||m[2]===current}).map(function(m){var c=m[6].split(" / ");var cache="R $"+c[0]+(c[1]?" / W $"+c[1]:"");return '<tr><td><input type="checkbox" class="pick" data-id="'+m[1]+'" aria-label="Select '+m[0]+'"'+(picked[m[1]]?' checked':'')+'></td><td><b>'+m[0]+'</b><br><span class="idsub">'+m[1]+'</span></td><td>'+m[2]+'</td><td>'+m[3]+'</td><td class="num">$'+m[4]+'</td><td class="num">$'+m[5]+'</td><td class="num">'+cache+'</td></tr>'}).join("")}
+render();
+rows.addEventListener("change",function(e){var t=e.target;if(t.classList.contains("pick")){if(t.checked)picked[t.dataset.id]=1;else delete picked[t.dataset.id];updatePicked()}});
+function pickedNames(){return models.filter(function(m){return picked[m[1]]}).map(function(m){return m[0]})}
+function updatePicked(){var n=pickedNames(),a=document.getElementById("pickNote"),l=document.getElementById("pickedList");
+a.innerHTML=n.length?n.length+' selected. <a href="#crypto">Continue to payment</a>':'Tick the models you want. They are added to your payment message.';
+l.textContent=n.length?n.join(", "):"No models selected yet. Tick them in the model table."}
+
+var ADDR="0x3a516374a2131aed8750c28535787a3d5fe05c25";
+try{if(typeof qrcode==="function"){var q=qrcode(0,"M");q.addData(ADDR);q.make();document.getElementById("qr").innerHTML=q.createSvgTag({cellSize:4,margin:0,scalable:true})}}catch(e){}
+document.getElementById("copy").onclick=function(){var b=this;
+function ok(){b.textContent="Copied";setTimeout(function(){b.textContent="Copy address"},1800)}
+function fb(){var r=document.createRange();r.selectNodeContents(document.getElementById("addr"));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Press copy now"}
+try{navigator.clipboard.writeText(ADDR).then(ok,fb)}catch(e){fb()}};
+document.getElementById("proofBtn").addEventListener("click",function(e){
+var em=document.getElementById("em").value.trim(),tx=document.getElementById("tx").value.trim(),amt=document.getElementById("amt").value.trim(),msg=document.getElementById("proofMsg"),cr=document.getElementById("credit").value,names=pickedNames();
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){e.preventDefault();msg.textContent="Enter a valid email address so we can send your key.";document.getElementById("em").focus();return}
+if(!names.length){e.preventDefault();msg.textContent="Tick at least one model in the table first.";return}
+if(!cr){e.preventDefault();msg.textContent="Choose how much credit you are adding.";document.getElementById("credit").focus();return}
+msg.textContent="";
+var t="AI Maxxer order\nEmail: "+em+"\nModels: "+names.join(", ")+"\nCredit: "+cr+(amt?"\nPaid: "+amt+" ETH":"")+(tx?"\nTx hash: "+tx:"");
+this.href="https://t.me/CoachK99?text="+encodeURIComponent(t)});
+</script>
+</body>
+</html>
